@@ -19,6 +19,7 @@ namespace :bundler do
           set :bundle_flags, '--deployment --quiet'
           set :bundle_jobs, nil
           set :bundle_env_variables, {}
+          set :bundle_binary_name, -> "bundle"
     DESC
   task :install do
     on fetch(:bundle_servers) do
@@ -48,7 +49,7 @@ namespace :bundler do
     DESC
   task :map_bins do
     fetch(:bundle_bins).each do |command|
-      SSHKit.config.command_map.prefix[command.to_sym].push("bundle exec")
+      SSHKit.config.command_map.prefix[command.to_sym].push("#{fetch(:bundle_binary)} exec")
     end
   end
 end
@@ -68,5 +69,6 @@ namespace :load do
     set :bundle_flags, '--deployment --quiet'
 
     set :linked_dirs, fetch(:linked_dirs, []) << '.bundle'
+    set :bundle_binay, "bundle"
   end
 end
