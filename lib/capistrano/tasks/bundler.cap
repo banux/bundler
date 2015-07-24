@@ -19,7 +19,7 @@ namespace :bundler do
           set :bundle_flags, '--deployment --quiet'
           set :bundle_jobs, nil
           set :bundle_env_variables, {}
-          set :bundle_binary, -> "bundle"
+          set :bundle_binary, -> "bundle21"
     DESC
   task :install do
     on fetch(:bundle_servers) do
