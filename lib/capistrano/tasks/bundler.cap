@@ -34,7 +34,7 @@ namespace :bundler do
           unless test(:bundle, :check, *options)
             options << "--without #{fetch(:bundle_without)}" if fetch(:bundle_without)
             options << "#{fetch(:bundle_flags)}" if fetch(:bundle_flags)
-            execute fetch(:bundle_binay), :install, *options
+            execute fetch(:bundle_binary), :install, *options
           end
         end
       end
@@ -69,6 +69,6 @@ namespace :load do
     set :bundle_flags, '--deployment --quiet'
 
     set :linked_dirs, fetch(:linked_dirs, []) << '.bundle'
-    set :bundle_binay, "bundle"
+    set :bundle_binary, "bundle21"
   end
 end
