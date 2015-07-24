@@ -19,7 +19,7 @@ namespace :bundler do
           set :bundle_flags, '--deployment --quiet'
           set :bundle_jobs, nil
           set :bundle_env_variables, {}
-          set :bundle_binary, -> "bundle21"
+          set :bundle_binary, -> "bundle"
     DESC
   task :install do
     on fetch(:bundle_servers) do
@@ -31,7 +31,7 @@ namespace :bundler do
           options << "--path #{fetch(:bundle_path)}" if fetch(:bundle_path)
           options << "--jobs #{fetch(:bundle_jobs)}" if fetch(:bundle_jobs)
 
-          unless test(:bundle, :check, *options)
+          unless test(fetch(:bundle_binary), :check, *options)
             options << "--without #{fetch(:bundle_without)}" if fetch(:bundle_without)
             options << "#{fetch(:bundle_flags)}" if fetch(:bundle_flags)
             execute fetch(:bundle_binary), :install, *options
@@ -69,6 +69,6 @@ namespace :load do
     set :bundle_flags, '--deployment --quiet'
 
     set :linked_dirs, fetch(:linked_dirs, []) << '.bundle'
-    set :bundle_binary, "bundle21"
+    set :bundle_binary, "bundle"
   end
 end
